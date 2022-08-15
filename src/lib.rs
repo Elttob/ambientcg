@@ -12,12 +12,28 @@
 //! in it's semi-complete state, so that I can more easily use it in other
 //! projects I'm working on. I don't intend for this to be used widely at the
 //! moment.
+//! 
+//! # Example
+//! 
+//! ```
+//! use ambientcg::{Request, Response};
+//! 
+//! let request = ambientcg::Request {
+//!     q: ["fabric".to_string()],
+//!     limit: Some(10),
+//!     .. Default::default()
+//! }
+//! 
+//! let response = request.submit().await?;
+//! 
+//! println!("Found {} assets", response.found_assets.len());
+//! ```
 
 pub mod errors;
-pub mod json;
 pub mod request;
 pub mod response;
 
+mod json;
 mod creation_method;
 mod data_type;
 mod sort;
@@ -25,3 +41,6 @@ mod sort;
 pub use creation_method::*;
 pub use data_type::*;
 pub use sort::*;
+
+pub use request::Request;
+pub use response::Response;

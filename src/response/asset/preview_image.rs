@@ -2,6 +2,12 @@ use std::{str::FromStr, convert::Infallible};
 
 use hex_color::HexColor;
 
+/// Represents a kind of preview image for an asset, including format,
+/// resolution, and any background colour if applicable.
+/// 
+/// You can convert this to and from strings freely. For forwards compatibility,
+/// if an unrecognised string is converted to this type, it will be stored in an
+/// Unparsed enum.
 #[derive(Debug, Hash, PartialEq, Eq)]
 pub enum PreviewImage {
     Png {

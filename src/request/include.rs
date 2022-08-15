@@ -2,6 +2,11 @@
 
 use std::fmt;
 
+/// Used to request extra fields from the ambientCG API when performing a
+/// request.
+/// 
+/// When converted to a string for display, these enums will use the camelCase
+/// style consistent with ambientCG's 'include' query parameter.
 #[derive(Debug, Hash, PartialEq, Eq)]
 pub enum Include {
     StatisticsData,

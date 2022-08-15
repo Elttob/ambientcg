@@ -4,6 +4,7 @@ use chrono::{DateTime, Utc};
 
 use crate::{json, response};
 
+/// Stores the information needed to perform a request to the ambientCG API.
 #[derive(Debug, Default)]
 pub struct Request {
     pub q: Vec<String>,

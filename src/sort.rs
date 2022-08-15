@@ -1,5 +1,11 @@
 use std::{str::FromStr, convert::Infallible, fmt};
 
+/// Represents the different sorting options available when requesting assets
+/// from ambientCG.
+/// 
+/// You can convert this to and from strings freely. For forwards compatibility,
+/// if an unrecognised string is converted to this type, it will be stored in an
+/// Unparsed enum.
 #[derive(Debug, Hash, PartialEq, Eq)]
 pub enum Sort {
     Latest,

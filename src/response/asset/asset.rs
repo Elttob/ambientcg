@@ -4,6 +4,10 @@ use chrono::{DateTime, Utc};
 
 use crate::errors;
 
+/// Represents a found asset as part of a response from ambientCG's web API.
+/// Most fields are optional and left out by default - you can add in the fields
+/// you need by configuring what the request includes, which will cause
+/// ambientCG to return values for those fields.
 #[derive(Debug)]
 pub struct Asset {
     pub asset_id: String,
