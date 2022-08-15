@@ -1,9 +1,13 @@
 [package]
 name = "ambientcg"
 version = "0.1.1"
+authors = ["Elttob"]
 edition = "2021"
 license = "MIT"
 description = "Rust interface around the ambientCG v2 web API"
+repository = "https://github.com/Elttob/ambientcg-rs"
+keywords = ["ambientcg", "web", "api", "3d", "assets"]
+categories = ["api-bindings"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
