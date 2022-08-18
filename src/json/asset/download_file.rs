@@ -7,7 +7,7 @@ pub struct DownloadFile {
     pub downloadLink: String,
     pub fileName: String,
     pub size: u64,
-    pub fileType: String,
+    pub filetype: String,
     pub attribute: String,
     pub zipContent: Option<Vec<String>>
 }

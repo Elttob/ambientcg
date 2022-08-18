@@ -143,7 +143,7 @@ impl From<Asset> for response::asset::Asset {
                                     file_name: download.fileName,
                                     size: download.size,
                                     attribute: util::non_empty_str(download.attribute.into()),
-                                    file_type: download.fileType.parse().unwrap(),
+                                    file_type: download.filetype.parse().unwrap(),
                                     zip_content: download.zipContent,
                                 })
                             }
