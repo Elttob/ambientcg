@@ -2,7 +2,7 @@ use std::collections::{HashMap, HashSet};
 
 use serde::{Serialize, Deserialize};
 
-use crate::{response::{self, asset::DownloadFolder}, json::util};
+use crate::{response, json::util};
 
 #[allow(non_snake_case)]
 #[derive(Serialize, Deserialize, Debug)]
