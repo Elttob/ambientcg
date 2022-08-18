@@ -1,3 +1,4 @@
+use anyhow::Result;
 use std::collections::{HashSet, HashMap};
 
 use chrono::{DateTime, Utc};
@@ -74,7 +75,7 @@ impl Request {
         query_params
     }
 
-    pub async fn submit(&self) -> Result<response::Response, Box<dyn std::error::Error>> {
+    pub async fn submit(&self) -> Result<response::Response> {
         let url = format!("https://ambientCG.com/api/v2/full_json?{}", self.as_query_params());
         let resp = reqwest::get(url).await?.json::<json::Response>().await?;
         Ok(resp.into())
