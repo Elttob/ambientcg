@@ -53,7 +53,8 @@ pub struct Asset {
     // VariationsData
     pub variations: Option<Vec<String>>,
 
-    // TODO: DownloadData
+    // DownloadData
+    pub download_folders: Option<HashMap<String, super::DownloadFolder>>,
 
     // PreviewData
     pub preview_links: Option<Vec<super::PreviewLink>>,

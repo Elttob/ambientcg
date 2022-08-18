@@ -2,7 +2,7 @@ use std::collections::{HashMap, HashSet};
 
 use serde::{Serialize, Deserialize};
 
-use crate::{response, json::util};
+use crate::{response::{self, asset::DownloadFolder}, json::util};
 
 #[allow(non_snake_case)]
 #[derive(Serialize, Deserialize, Debug)]
@@ -50,7 +50,8 @@ pub struct Asset {
     // VariationsData
     variations: Option<Vec<String>>,
 
-    // TODO: DownloadData
+    // DownloadData
+    downloadFolders: Option<HashMap<String, super::DownloadFolder>>,
 
     // PreviewData
     previewLinks: Option<Vec<super::PreviewLink>>,
@@ -124,7 +125,47 @@ impl From<Asset> for response::asset::Asset {
             // VariationsData
             variations: json.variations,
 
-            // TODO: DownloadData
+            // DownloadData
+            download_folders: match json.downloadFolders {
+                Some(folders_json) => {
+                    let mut folders = HashMap::new();
+
+                    for (name, contents_json) in folders_json {
+                        let mut categories = HashMap::new();
+
+                        for (title, category_json) in contents_json.downloadFiletypeCategories {
+                            let mut downloads = Vec::new();
+
+                            for download in category_json.downloads {
+                                downloads.push(response::asset::DownloadFile {
+                                    full_download_path: download.fullDownloadPath,
+                                    download_link: download.downloadLink,
+                                    file_name: download.fileName,
+                                    size: download.size,
+                                    attribute: util::non_empty_str(download.attribute.into()),
+                                    file_type: download.fileType.parse().unwrap(),
+                                    zip_content: download.zipContent,
+                                })
+                            }
+                            
+                            let category = response::asset::DownloadCategory {
+                                file_type: title.parse().unwrap(),
+                                downloads: downloads
+                            };
+                            categories.insert(category.file_type.clone(), category);
+                        }
+
+                        let folder = response::asset::DownloadFolder {
+                            title: contents_json.title,
+                            download_filetype_categories: categories
+                        };
+                        folders.insert(name, folder);
+                    }
+
+                    Some(folders)
+                },
+                None => None
+            },
 
             // PreviewData
             preview_links: match json.previewLinks {
